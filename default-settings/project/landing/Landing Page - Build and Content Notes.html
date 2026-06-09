@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snowbird Atlas — Landing Page Build &amp; Content Notes</title>
+<link rel="icon" href="assets/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0B1F3A;--slate:#1E3A5F;--cyan:#22D3EE;--cloud:#F9FAFB;--gray:#9CA3AF;--ink:#0B1F3A;--muted:#56627a;--hair:rgba(11,31,58,.12);
+    --display:"Sora",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef1f5;color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .page{max-width:880px;margin:32px auto;background:#fff;padding:clamp(28px,5vw,64px);box-shadow:0 20px 60px -30px rgba(11,31,58,.4);border-radius:6px}
+  h1,h2,h3,h4{font-family:var(--display);font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0}
+  h1{font-size:32px}
+  h2{font-size:23px;margin:0 0 4px}
+  h3{font-size:16px;margin:0 0 6px}
+  p{margin:0 0 12px;max-width:68ch}
+  a{color:#0e7c8c}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--slate);display:flex;align-items:center;gap:9px;margin-bottom:10px}
+  .eyebrow::before{content:"";width:18px;height:2px;background:var(--cyan)}
+  .doc-head{border-bottom:2px solid var(--navy);padding-bottom:24px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+  .doc-head .meta{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;line-height:1.7}
+  section.blk{padding:34px 0;border-bottom:1px solid var(--hair)}
+  section.blk:last-child{border-bottom:0}
+  .num{font-family:var(--mono);color:var(--cyan);font-weight:500;margin-right:8px}
+  .copy{background:var(--cloud);border:1px solid var(--hair);border-left:3px solid var(--cyan);border-radius:8px;padding:18px 20px;margin:14px 0}
+  .copy .lab{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-bottom:8px}
+  .copy .h{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.15;margin-bottom:6px}
+  .copy .sub{color:var(--muted)}
+  .copy p{margin:0 0 8px}
+  .copy p:last-child{margin:0}
+  ul.clean{margin:8px 0 14px;padding-left:0;list-style:none}
+  ul.clean li{padding:5px 0 5px 22px;position:relative;max-width:68ch}
+  ul.clean li::before{content:"";position:absolute;left:0;top:13px;width:7px;height:7px;border-radius:2px;background:var(--cyan)}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--hair);vertical-align:top}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);font-weight:500}
+  td code,code{font-family:var(--mono);font-size:12.5px;background:var(--cloud);padding:2px 6px;border-radius:5px;color:var(--navy)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .tool{border:1px solid var(--hair);border-radius:10px;padding:18px 20px;background:#fff}
+  .tool h4{font-family:var(--display);font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);border:1px solid var(--hair);border-radius:999px;padding:3px 9px}
+  .swatches{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .sw{font-family:var(--mono);font-size:11px;border:1px solid var(--hair);border-radius:8px;overflow:hidden}
+  .sw .c{height:34px;width:96px}
+  .sw .t{padding:5px 8px;color:var(--muted)}
+  .note{font-size:13px;color:var(--muted);font-style:italic}
+  @media print{body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;border-radius:0}section.blk{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="doc-head">
+    <div>
+      <div class="eyebrow">Companion Notes</div>
+      <h1>Snowbird Atlas — Landing Page</h1>
+      <p style="margin:8px 0 0;color:var(--muted)">Full copy, layout guidance, visual hierarchy, CTA reference, mobile notes, and build instructions for the page in <code>Snowbird Atlas Landing Page.html</code>.</p>
+    </div>
+    <div class="meta">v1.0 · 2026<br>Enterprise &amp; Technology<br>Strategy → Execution</div>
+  </div>
+
+  <!-- USE -->
+  <section class="blk">
+    <div class="eyebrow"><span class="num">00</span> How to use this</div>
+    <h2>One page, two files.</h2>
+    <p>The HTML file is a working, responsive build you can ship as-is or hand to a developer. This document is the source of truth for copy and intent so you can rebuild it in any platform. Everything below maps 1:1 to the sections on the page.</p>
+    <p class="note">Placeholders (stats, certifications, contract vehicles, client logos) are intentionally marked — replace before going live.</p>
+  </section>
+
+  <!-- COPY -->
+  <section class="blk">
+    <div class="eyebrow"><span class="num">01</span> Full Page Copy</div>
+    <h2>Header / Navigation</h2>
+    <p>Logo (left) · Capabilities · Approach · Outcomes · About · Contact · <b>Primary CTA: “Schedule a Conversation.”</b> Nav is transparent over the hero and turns solid navy on scroll.</p>
+
+    <h2 style="margin-top:24px">Hero</h2>
+    <div class="copy">
+      <div class="lab">Eyebrow</div><p>Strategy to Execution · Enterprise &amp; Technology</p>
+      <div class="lab" style="margin-top:10px">Headline</div><div class="h">Strategy rarely fails on the whiteboard. It fails in execution.</div>
+      <div class="lab">Subheadline</div><div class="sub">Snowbird Atlas closes the gap between intent and delivery — aligning teams, governance, and operating models so the work actually ships, with outcomes you can measure.</div>
+      <div class="lab" style="margin-top:10px">Primary CTA</div><p>Schedule a Conversation</p>
+      <div class="lab">Secondary CTA</div><p>Request a Capability Statement</p>
+      <div class="lab" style="margin-top:10px">Trust strip</div><p>Assess → Improve (end-to-end delivery model) · SAFe · Lean-Agile (certified practitioners) · Fixed-scope (defined deliverables &amp; terms)</p>
+    </div>
+    <p class="note">Visual: the existing white/reversed Snowbird Atlas symbol centered in concentric orbital rings, with two floating metric chips (“On-time delivery — trending up”, “Cycle time — reduced”) and a cyan radial glow. All built from existing brand elements; no new art.</p>
+
+    <h2 style="margin-top:24px">Capabilities — “What we do”</h2>
+    <p class="note">Intro: Six practices that connect strategy to the work in flight — delivered as scoped engagements, sequenced into a coherent path, or embedded where you need them.</p>
+    <table>
+      <tr><th>#</th><th>Card</th><th>Description</th></tr>
+      <tr><td>01</td><td>Agile Transformation &amp; Delivery</td><td>SAFe and Lean-Agile delivery that fixes the operating model, not just the ceremonies — addressing the governance and flow constraints teams are too often blamed for.</td></tr>
+      <tr><td>02</td><td>Program &amp; Portfolio Management</td><td>Intake, prioritization, and PI planning that connect funded strategy to the work in flight — with the visibility leaders need to make real decisions.</td></tr>
+      <tr><td>03</td><td>Product Strategy &amp; New Product Development</td><td>From concept to launch — product operating models, discovery, and delivery cadences that make sure the right things get built and reach the market.</td></tr>
+      <tr><td>04</td><td>AI-Enabled Operations</td><td>Readiness, operating-model design, and responsible adoption that make AI usable and governed — right-sized to your risk posture, not a generic framework.</td></tr>
+      <tr><td>05</td><td>Process Improvement &amp; Value Stream Optimization</td><td>Find the real constraint, not the visible symptom. We map value streams end to end and remove the friction that quietly slows delivery.</td></tr>
+      <tr><td>06</td><td>Enterprise Consulting &amp; Delivery Support</td><td>Embedded consulting sized to the work — transformation planning, governance redesign, and org design for complex, fast-moving organizations.</td></tr>on-driven environments.</td></tr>
+    </table>
+
+    <h2 style="margin-top:24px">Differentiator — “Why Snowbird Atlas”</h2>
+    <p class="note">Headline: Built for the part most firms skip: getting it done. Intro: Plenty of partners can write the strategy or run the training. We work in the space where strategy meets delivery — where operating models, governance, and teams either come together or quietly fall apart.</p>
+    <ul class="clean">
+      <li><b>We work in your operating model</b> — not a slide deck. We embed in how decisions, funding, and work actually flow, and change it where it’s holding delivery back.</li>
+      <li><b>Measurable by design</b> — every engagement is tied to delivery outcomes you can see: cycle time, throughput, predictability, governance health.</li>
+      <li><b>We find the real constraint</b> — most “team performance” problems are governance or operating-model problems. We diagnose the actual bottleneck first.</li>
+      <li><b>Sized for complex organizations</b> — right-sized governance and responsible practices that satisfy enterprise stakeholders, risk, and compliance without throttling teams.</li>
+    </ul>
+
+    <h2 style="margin-top:24px">How We Work</h2>
+    <table>
+      <tr><th>Step</th><th>Name</th><th>Description</th></tr>
+      <tr><td>1</td><td>Assess</td><td>Diagnose delivery health, governance, and operating-model constraints. Build a fact base before anyone buys a tool.</td></tr>
+      <tr><td>2</td><td>Align</td><td>Connect strategy, funding, and teams around shared priorities and clear decision rights.</td></tr>
+      <tr><td>3</td><td>Design</td><td>Define the operating model, governance gates, and delivery cadences — sized to your environment.</td></tr>
+      <tr><td>4</td><td>Execute</td><td>Embed alongside your teams to put the model to work and ship real outcomes, not recommendations.</td></tr>
+      <tr><td>5</td><td>Measure &amp; Improve</td><td>Instrument delivery, track outcomes, and tighten the loop so gains hold after we leave.</td></tr>
+    </table>
+
+    <h2 style="margin-top:24px">Outcomes</h2>
+    <p class="note">Headline: What changes when the work flows.</p>
+    <ul class="clean">
+      <li><b>Faster delivery</b> — shorter cycle times and fewer stalls between idea and release.</li>
+      <li><b>Better visibility</b> — leaders can see status, flow, and risk without chasing it down.</li>
+      <li><b>Clearer prioritization</b> — a defensible way to decide what gets done first, and what waits.</li>
+      <li><b>Reduced operational friction</b> — less rework, fewer handoff delays, cleaner dependencies.</li>
+      <li><b>Stronger governance</b> — right-sized oversight and approval gates that fit your risk posture.</li>
+      <li><b>Improved execution discipline</b> — cadences and commitments that teams actually keep.</li>
+    </ul>
+
+    <h2 style="margin-top:24px">Credibility</h2>
+    <p class="note">Headline: Proof, not promises. Stat placeholders (replace): XX+ engagements · XX certified practitioners · XX% avg. cycle-time improvement · XX years delivering enterprise transformation. Columns: Certifications · How We Engage (fixed-scope / embedded T&amp;M / workshops) · Who We Serve (enterprise transformation offices, product &amp; technology orgs, high-growth &amp; PE-backed companies). Plus a client/partner logo row.</p>
+
+    <h2 style="margin-top:24px">Final CTA</h2>
+    <div class="copy">
+      <div class="h">Let’s talk about what’s getting stuck.</div>
+      <div class="sub">A short conversation is enough to see where the delivery gap is and whether we can help close it. No pitch theater — just a clear read on your situation.</div>
+      <p style="margin-top:8px"><b>CTAs:</b> Schedule a Conversation · Request a Capability Statement</p>
+    </div>
+
+    <h2 style="margin-top:24px">Footer</h2>
+    <p>Logo + one-line description, three link columns (Capabilities · Company · Contact), email/site placeholders, LinkedIn + email icons, and a copyright line: “© 2026 Snowbird Atlas · A Snowbird Agility platform.”</p>
+  </section>
+
+  <!-- LAYOUT + HIERARCHY -->
+  <section class="blk">
+    <div class="eyebrow"><span class="num">02</span> Layout &amp; Visual Hierarchy</div>
+    <h2>Section-by-section.</h2>
+    <ul class="clean">
+      <li><b>Rhythm</b> — alternate light (Cloud White) and dark (Midnight Navy) bands so the page breathes: Hero (dark) → Capabilities (light) → Why Us (dark) → Approach (light) → Outcomes (white, ruled) → Credibility (dark) → Final CTA (gradient card on light) → Footer (deep navy).</li>
+      <li><b>Hero</b> — two columns on desktop (≈58% copy / 42% visual). Headline is the largest type on the page; one cyan-highlighted word (“execution”) is the only accent. Two CTAs: solid cyan primary, outlined secondary.</li>
+      <li><b>Capabilities</b> — 3×2 card grid. Each card: small geometric icon → mono index → bold title → 2-line description. Hover lifts the card and brings in a cyan border.</li>
+      <li><b>Why Us</b> — 2×2 quadrant on navy, hairline dividers, numbered. Reads as substance, not marketing.</li>
+      <li><b>How We Work</b> — horizontal 5-node stepper with a connecting gradient line; collapses to a vertical timeline on mobile.</li>
+      <li><b>Outcomes</b> — 3×2 list cards with a small directional icon each. Restrained — no invented metrics.</li>
+      <li><b>Credibility</b> — 4 stat tiles over 3 reference columns + a logo row, all placeholder-friendly.</li>
+      <li><b>Final CTA</b> — centered gradient card, single focused message, both CTAs repeated.</li>
+    </ul>
+    <h3 style="margin-top:18px">Type hierarchy</h3>
+    <table>
+      <tr><th>Level</th><th>Font</th><th>Use</th></tr>
+      <tr><td>Hero H1</td><td>Sora 700, ~62px</td><td>One per page</td></tr>
+      <tr><td>Section H2</td><td>Sora 700, ~46px</td><td>Section titles</td></tr>
+      <tr><td>Card H3</td><td>Sora 600–700, 17–20px</td><td>Cards, steps</td></tr>
+      <tr><td>Eyebrow / label</td><td>IBM Plex Mono 500, 12px, tracked, uppercase</td><td>Section tags, metadata</td></tr>
+      <tr><td>Body</td><td>IBM Plex Sans 400, 15–21px</td><td>All paragraphs</td></tr>
+    </table>
+  </section>
+
+  <!-- CTA COPY -->
+  <section class="blk">
+    <div class="eyebrow"><span class="num">03</span> CTA Button Copy</div>
+    <table>
+      <tr><th>Placement</th><th>Primary</th><th>Secondary</th></tr>
+      <tr><td>Nav</td><td>Schedule a Conversation</td><td>—</td></tr>
+      <tr><td>Hero</td><td>Schedule a Conversation →</td><td>Request a Capability Statement</td></tr>
+      <tr><td>Final CTA</td><td>Schedule a Conversation →</td><td>Request a Capability Statement</td></tr>
+      <tr><td>Footer</td><td>Schedule a Conversation</td><td>email / site links</td></tr>
+    </table>
+    <p class="note">All primary CTAs open the same contact modal (name, work email, organization, interest, optional message) with inline validation and a success state. Point the form at your CRM/email endpoint on build.</p>
+  </section>
+
+  <!-- MOBILE -->
+  <section class="blk">
+    <div class="eyebrow"><span class="num">04</span> Mobile Layout Notes</div>
+    <ul class="clean">
+      <li><b>Nav</b> collapses to a hamburger at ≤920px; menu drops from the top as a full-width navy panel. CTA moves inside the menu.</li>
+      <li><b>Hero</b> stacks to one column with the visual <em>above</em> the copy; orbital visual scales to ~78% width; floating chips reflow inside the frame.</li>
+      <li><b>Capabilities &amp; Outcomes</b> go 3 → 2 → 1 column as width drops (breakpoints ~900px and ~600px).</li>
+      <li><b>How We Work</b> switches from a horizontal stepper to a vertical timeline with the connector on the left.</li>
+      <li><b>Why Us</b> and <b>Credibility</b> columns stack to single column; stat tiles go 4 → 2.</li>
+      <li><b>Tap targets</b> ≥ 44px; body text stays ≥ 15px; section padding compresses via <code>clamp()</code>.</li>
+      <li><b>Modal</b> is full-width with comfortable padding; form fields stack to one column under 480px.</li>
+    </ul>
+  </section>
+
+  <!-- BUILD -->
+  <section class="blk">
+    <div class="eyebrow"><span class="num">05</span> Build Guidance</div>
+    <h2>Ship it in your platform of choice.</h2>
+    <div class="grid2" style="margin-top:14px">
+      <div class="tool">
+        <h4>Developer / hand-code <span class="tag">fastest</span></h4>
+        <p style="margin:0">The provided files are production-ready: one HTML, <code>landing.css</code>, <code>landing.js</code>, <code>marks.js</code>, and the <code>assets/</code> folder. Drop on any static host (Netlify, Vercel, S3, GitHub Pages). Wire the form’s submit handler to your endpoint and you’re live.</p>
+      </div>
+      <div class="tool">
+        <h4>Webflow</h4>
+        <p style="margin:0">Recreate sections as native Webflow sections/grids. Add the three Google Fonts in Project Settings. Build the card/step grids with Grid or Flexbox. Use a Webflow Form for the modal (interaction: open on CTA click). Set the brand hexes as Swatches.</p>
+      </div>
+      <div class="tool">
+        <h4>Framer</h4>
+        <p style="margin:0">Use stacks for each section and a responsive grid for cards. Add fonts via the Text panel. The hero orbital can be a centered image + circular shapes. Use a Framer Form component and an overlay for the modal; enable scroll/appear effects to match the reveal animations.</p>
+      </div>
+      <div class="tool">
+        <h4>WordPress</h4>
+        <p style="margin:0">In a block builder (Gutenberg, Elementor, Bricks): build with columns/containers. Load fonts via the theme or a fonts plugin. Use a forms plugin (Gravity Forms, WPForms) in a popup for the modal. Or simply embed the static HTML build in a full-width page template.</p>
+      </div>
+    </div>
+    <h3 style="margin-top:20px">Brand reference</h3>
+    <div class="swatches">
+      <div class="sw"><div class="c" style="background:#0B1F3A"></div><div class="t">#0B1F3A Navy</div></div>
+      <div class="sw"><div class="c" style="background:#1E3A5F"></div><div class="t">#1E3A5F Slate</div></div>
+      <div class="sw"><div class="c" style="background:#22D3EE"></div><div class="t">#22D3EE Cyan</div></div>
+      <div class="sw"><div class="c" style="background:#F9FAFB;border-bottom:1px solid var(--hair)"></div><div class="t">#F9FAFB Cloud</div></div>
+      <div class="sw"><div class="c" style="background:#9CA3AF"></div><div class="t">#9CA3AF Gray</div></div>
+    </div>
+    <p style="margin-top:6px"><b>Fonts (Google):</b> Sora (display/headlines), IBM Plex Sans (body), IBM Plex Mono (labels). <b>Logo files</b> in <code>assets/</code>: <code>symbol-color.png</code>, <code>symbol-white.png</code>, <code>symbol-navy.png</code>, <code>app-icon.svg</code>, <code>favicon.ico</code>.</p>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snowbird Atlas — Redesign Directions</title>
+<link rel="icon" href="assets/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0B1F3A;--slate:#1E3A5F;--cyan:#22D3EE;--cloud:#F9FAFB;--gray:#9CA3AF;--ink:#0B1F3A;--muted:#56627a;--hair:rgba(11,31,58,.12);
+    --display:"Sora",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:#e9edf2;color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6}
+  h1,h2,h3,h4{font-family:var(--display);font-weight:700;letter-spacing:-.02em;margin:0;line-height:1.08}
+  p{margin:0}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(18px,4vw,44px)}
+  .mono{font-family:var(--mono)}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--slate);display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:18px;height:2px;background:var(--cyan)}
+
+  .top{background:var(--navy);color:#fff;padding:46px 0 40px}
+  .top .eyebrow{color:var(--cyan)}.top .eyebrow::before{background:var(--cyan)}
+  .top h1{font-size:clamp(28px,4vw,44px);color:#fff;margin:16px 0 14px}
+  .top p{color:#c7d0de;max-width:70ch}
+
+  .dir{padding:48px 0;border-bottom:1px solid var(--hair)}
+  .dir-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+  .dir-head .no{font-family:var(--mono);font-size:13px;color:var(--cyan);font-weight:600}
+  .dir-head h2{font-size:clamp(22px,3vw,32px)}
+  .dir-sub{color:var(--muted);margin-bottom:26px;max-width:72ch}
+
+  .preview{border:1px solid var(--hair);border-radius:10px;overflow:hidden;box-shadow:0 24px 60px -36px rgba(11,31,58,.5);margin-bottom:26px}
+  .pv{height:380px;position:relative;overflow:hidden}
+  @media(max-width:680px){.pv{height:300px}}
+
+  .analysis{display:grid;grid-template-columns:1.5fr 1fr;gap:30px}
+  @media(max-width:760px){.analysis{grid-template-columns:1fr;gap:20px}}
+  .analysis dl{margin:0;display:grid;grid-template-columns:130px 1fr;gap:10px 18px}
+  .analysis dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);padding-top:2px}
+  .analysis dd{margin:0;font-size:14px;color:var(--ink)}
+  .why{background:var(--navy);color:#cfd8e6;border-radius:10px;padding:22px 24px;align-self:start}
+  .why h4{color:#fff;font-size:14px;font-family:var(--mono);font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+  .why h4 span{color:var(--cyan)}
+  .why p{font-size:14px;line-height:1.6}
+
+  .rec{background:var(--navy);color:#fff;padding:50px 0}
+  .rec .eyebrow{color:var(--cyan)}.rec .eyebrow::before{background:var(--cyan)}
+  .rec h2{color:#fff;font-size:clamp(24px,3.4vw,38px);margin:16px 0 16px;max-width:24ch}
+  .rec .pick{color:var(--cyan)}
+  .rec p{color:#c7d0de;max-width:74ch;margin-bottom:14px}
+  .rec .tag{display:inline-flex;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 13px;color:#cfd8e6;margin:4px 8px 4px 0}
+
+  /* ===== shared preview bits ===== */
+  .pv-bar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+  .pv-brand{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:-.01em}
+  .pv-brand img{height:24px;width:auto}
+
+  /* D1 — capability statement (paper) */
+  .d1{background:var(--cloud)}
+  .d1 .pv-bar{color:var(--muted);border-bottom:1px solid var(--hair)}
+  .d1 .pv-brand{color:var(--navy)}
+  .d1 .body{position:absolute;top:54px;left:0;right:0;bottom:0;padding:30px 22px;display:grid;grid-template-columns:1.7fr 1fr;gap:24px}
+  .d1 h3{font-size:clamp(20px,3.2vw,33px);color:var(--navy);letter-spacing:-.03em;line-height:1.02}
+  .d1 h3 em{font-style:normal;color:var(--slate);position:relative}
+  .d1 .meta{border-left:1px solid var(--hair);padding-left:18px;display:flex;flex-direction:column;gap:14px}
+  .d1 .meta .row .k{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+  .d1 .meta .row .v{font-family:var(--display);font-weight:600;font-size:13px;color:var(--navy);margin-top:2px}
+  .d1 .idxnav{position:absolute;left:22px;right:22px;bottom:18px;display:flex;gap:0;border-top:1px solid var(--navy);font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .d1 .idxnav span{flex:1;padding-top:8px;border-right:1px solid var(--hair)}
+  .d1 .idxnav span b{color:var(--cyan);font-weight:500}
+
+  /* D2 — atlas / navigation (navy chart) */
+  .d2{background:#0a1c33}
+  .d2 .graticule{position:absolute;inset:0;background-image:linear-gradient(rgba(156,163,175,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(156,163,175,.10) 1px,transparent 1px);background-size:46px 46px}
+  .d2 .pv-bar{color:var(--gray)}
+  .d2 .pv-brand{color:#fff}
+  .d2 .coord{position:absolute;font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:rgba(34,211,238,.7)}
+  .d2 .body{position:absolute;top:58px;left:22px;right:22px;bottom:22px;display:grid;grid-template-columns:1.15fr 1fr;gap:18px;align-items:center}
+  .d2 h3{font-size:clamp(19px,3vw,30px);color:#fff;letter-spacing:-.02em;line-height:1.05}
+  .d2 h3 em{font-style:normal;color:var(--cyan)}
+  .d2 .route{position:relative;height:100%;min-height:160px}
+
+  /* D3 — mission control (dark operational) */
+  .d3{background:#081729}
+  .d3 .pv-bar{color:var(--gray);border-bottom:1px solid rgba(255,255,255,.08)}
+  .d3 .pv-brand{color:#fff}
+  .d3 .tele{position:absolute;top:46px;left:0;right:0;display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.08);font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
+  .d3 .tele .cell{flex:1;padding:10px 18px;border-right:1px solid rgba(255,255,255,.08)}
+  .d3 .tele .cell b{display:block;color:#fff;font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:0;text-transform:none;margin-top:3px}
+  .d3 .tele .cell .up{color:var(--cyan)}
+  .d3 .body{position:absolute;top:108px;left:22px;right:22px;bottom:22px;display:grid;grid-template-columns:1.3fr 1fr;gap:22px}
+  .d3 h3{font-size:clamp(18px,2.9vw,29px);color:#fff;letter-spacing:-.02em;line-height:1.06}
+  .d3 h3 em{font-style:normal;color:var(--cyan)}
+  .d3 .rail{display:flex;flex-direction:column;gap:0;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+  .d3 .rail .node{display:flex;align-items:center;gap:11px;padding:7px 0;color:#aeb9cb;position:relative}
+  .d3 .rail .node .dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--cyan);flex:none}
+  .d3 .rail .node.done .dot{background:var(--cyan)}
+  .d3 .rail .node.done{color:#fff}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">Redesign · Three Directions</p>
+    <h1>Making Snowbird Atlas feel owned, not templated.</h1>
+    <p>Same brand, logo, palette, messaging, and page flow — a new visual system. Each direction below builds the page around the identity's real ideas: navigation, altitude, trajectory, alignment, and operational clarity. A live hero preview, the design rationale, and why it escapes the generic SaaS look.</p>
+  </div>
+</header>
+
+<!-- ================= DIRECTION 1 ================= -->
+<section class="dir"><div class="wrap">
+  <div class="dir-head"><span class="no">01</span><h2>Executive Capability Statement</h2></div>
+  <p class="dir-sub">A consulting-grade document made digital. Reads like a premium printed capability statement — typographic confidence, sharp structure, almost no ornament.</p>
+
+  <div class="preview"><div class="pv d1">
+    <div class="pv-bar"><span class="pv-brand"><img src="assets/symbol-navy.png" alt="">SNOWBIRD ATLAS</span><span>Capability Overview — 2026</span></div>
+    <div class="body">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px">Strategy → Execution</div>
+        <h3>Strategy rarely fails on the whiteboard. It fails in <em>execution.</em></h3>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="k">Focus</div><div class="v">Delivery &amp; operating models</div></div>
+        <div class="row"><div class="k">Serves</div><div class="v">Enterprise · Technology</div></div>
+        <div class="row"><div class="k">Model</div><div class="v">Fixed-scope · Embedded</div></div>
+      </div>
+    </div>
+    <div class="idxnav"><span><b>01</b> &nbsp;Capabilities</span><span><b>02</b> &nbsp;Approach</span><span><b>03</b> &nbsp;Outcomes</span><span><b>04</b> &nbsp;Credibility</span></div>
+  </div></div>
+
+  <div class="analysis">
+    <dl>
+      <dt>Layout</dt><dd>Asymmetric editorial grid with a wide type column and a ruled meta sidebar. Numbered section index like a document table of contents.</dd>
+      <dt>Hero</dt><dd>No imagery — headline carries it, anchored by hairline rules and a meta block. Left-aligned, never centered.</dd>
+      <dt>Section style</dt><dd>Ledger rows and rules instead of cards. Capabilities become a numbered, ruled list; outcomes a tabular spread.</dd>
+      <dt>Motifs</dt><dd>Hairlines, section numbers, baseline rhythm, generous whitespace, registration ticks.</dd>
+      <dt>Typography</dt><dd>Sora set large and tight for headlines; IBM Plex Mono labels carry the "official document" tone.</dd>
+      <dt>Logo use</dt><dd>Small navy symbol as a letterhead mark, top-left. The mark recedes; structure leads.</dd>
+    </dl>
+    <div class="why"><h4>Why it's <span>less generic</span></h4><p>No hero image, no cards, no gradients to be generic <em>with</em>. Credibility comes from typographic discipline — the look of a firm that delivers, not a SaaS launch.</p></div>
+  </div>
+</div></section>
+
+<!-- ================= DIRECTION 2 ================= -->
+<section class="dir"><div class="wrap">
+  <div class="dir-head"><span class="no">02</span><h2>Atlas / Navigation</h2></div>
+  <p class="dir-sub">The most ownable route. Builds a quiet cartographic system — graticule lines, coordinates, route paths, and waypoints — directly from the bird-globe-orbit identity.</p>
+
+  <div class="preview"><div class="pv d2">
+    <div class="graticule"></div>
+    <div class="coord" style="top:60px;left:22px">38.9°N</div>
+    <div class="coord" style="bottom:22px;right:22px">077.0°W</div>
+    <div class="pv-bar"><span class="pv-brand"><img src="assets/symbol-white.png" alt="">SNOWBIRD ATLAS</span><span>N 01 — Bearing 045°</span></div>
+    <div class="body">
+      <div>
+        <div class="eyebrow" style="color:var(--cyan);margin-bottom:14px">Charting delivery</div>
+        <h3>A clear bearing from strategy to <em>delivered outcomes.</em></h3>
+      </div>
+      <div class="route">
+        <svg viewBox="0 0 260 200" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" fill="none">
+          <ellipse cx="150" cy="110" rx="92" ry="38" stroke="rgba(34,211,238,.25)" stroke-width="1" transform="rotate(-18 150 110)"/>
+          <path d="M18 175 C 80 150 120 95 235 30" stroke="#22D3EE" stroke-width="1.5" stroke-dasharray="2 6" stroke-linecap="round"/>
+          <g fill="#22D3EE"><circle cx="18" cy="175" r="3.5"/><circle cx="120" cy="112" r="3"/><circle cx="235" cy="30" r="4"/></g>
+          <circle cx="235" cy="30" r="9" stroke="#22D3EE" stroke-width="1"/>
+          <text x="14" y="192" fill="#9CA3AF" font-family="IBM Plex Mono" font-size="8">ASSESS</text>
+          <text x="208" y="22" fill="#fff" font-family="IBM Plex Mono" font-size="8">OUTCOME</text>
+        </svg>
+        <img src="assets/symbol-white.png" alt="" style="position:absolute;width:46px;top:14%;right:6%;filter:drop-shadow(0 6px 16px rgba(0,0,0,.5))">
+      </div>
+    </div>
+  </div></div>
+
+  <div class="analysis">
+    <dl>
+      <dt>Layout</dt><dd>A "chart" canvas. Content sits on a faint graticule; sections are plotted positions with coordinates and bearings rather than stacked blocks.</dd>
+      <dt>Hero</dt><dd>Headline left; a route diagram right — a dashed trajectory rising through waypoints (Assess → Outcome), the bird as the moving marker.</dd>
+      <dt>Section style</dt><dd>Each section is a "waypoint" with a coordinate label and index. A faint vertical route line threads the whole page.</dd>
+      <dt>Motifs</dt><dd>Graticule, coordinates, bearings, dashed flight paths, orbital arcs, waypoint dots, altitude markers.</dd>
+      <dt>Typography</dt><dd>Sora headlines; IBM Plex Mono does heavy lifting as instrument/coordinate labels — precise, navigational.</dd>
+      <dt>Logo use</dt><dd>The bird becomes a marker travelling the route; the orbit ring is echoed as arcs across sections. The identity <em>is</em> the system.</dd>
+    </dl>
+    <div class="why"><h4>Why it's <span>less generic</span></h4><p>Nothing here ships in a template kit. The cartographic language is specific to "Atlas" and to professional-services navigation — premium, purposeful, and impossible to mistake for a stock SaaS page.</p></div>
+  </div>
+</div></section>
+
+<!-- ================= DIRECTION 3 ================= -->
+<section class="dir"><div class="wrap">
+  <div class="dir-head"><span class="no">03</span><h2>Mission Control</h2></div>
+  <p class="dir-sub">An operational read on delivery — signals, progress paths, and portfolio visibility expressed through type and line work, never literal dashboard widgets.</p>
+
+  <div class="preview"><div class="pv d3">
+    <div class="pv-bar"><span class="pv-brand"><img src="assets/symbol-white.png" alt="">SNOWBIRD ATLAS</span><span>Delivery Status — Nominal</span></div>
+    <div class="tele">
+      <div class="cell">On-time delivery<b class="up">▲ Trending</b></div>
+      <div class="cell">Cycle time<b class="up">▼ Reduced</b></div>
+      <div class="cell">Predictability<b>Stable</b></div>
+      <div class="cell">Governance<b>Healthy</b></div>
+    </div>
+    <div class="body">
+      <div>
+        <div class="eyebrow" style="color:var(--cyan);margin-bottom:12px">Execution, in view</div>
+        <h3>From strategy to shipped — with the work always <em>in view.</em></h3>
+      </div>
+      <div class="rail">
+        <div class="node done"><span class="dot"></span>Assess</div>
+        <div class="node done"><span class="dot"></span>Align</div>
+        <div class="node done"><span class="dot"></span>Design</div>
+        <div class="node"><span class="dot"></span>Execute</div>
+        <div class="node"><span class="dot"></span>Measure</div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="analysis">
+    <dl>
+      <dt>Layout</dt><dd>A control-surface frame: a telemetry strip up top, a working area below with a live delivery rail down one side.</dd>
+      <dt>Hero</dt><dd>Headline plus a status strip of real delivery signals and a stage rail showing progress — operational, not decorative.</dd>
+      <dt>Section style</dt><dd>Sections read as panels of a console, separated by fine rules and status labels rather than floating cards.</dd>
+      <dt>Motifs</dt><dd>Signal arrows, progress nodes, stage rails, status labels, fine telemetry lines, monospace readouts.</dd>
+      <dt>Typography</dt><dd>Sora for headlines; IBM Plex Mono everywhere for readouts and labels — the voice of an operations console.</dd>
+      <dt>Logo use</dt><dd>Bird as a "position" marker on the delivery rail; orbit echoed in status indicators.</dd>
+    </dl>
+    <div class="why"><h4>Why it's <span>less generic</span></h4><p>It signals delivery competence over marketing polish. The trick is restraint — signals drawn in type and line, so it reads operational and premium instead of like a product dashboard screenshot.</p></div>
+  </div>
+</div></section>
+
+<!-- ================= RECOMMENDATION ================= -->
+<section class="rec"><div class="wrap">
+  <p class="eyebrow">Recommendation</p>
+  <h2>Build <span class="pick">Direction 02 — Atlas / Navigation</span>, with Direction 01's discipline as the backbone.</h2>
+  <p>Direction 02 is the most <em>ownable</em>: the cartographic system is unmistakably "Atlas," it carries the bird-globe-orbit identity as functional design language, and it reads premium without a single gradient blob or glowing icon. On its own it could drift decorative — so we anchor it on Direction 01's structural rigor: editorial type, hairline rules, numbered sections, and a capability-statement sense of credibility.</p>
+  <p>Mission Control (03) contributes one focused moment — a restrained delivery rail in the “How We Work” and “Outcomes” sections — so the operational story shows up without turning the page into a dashboard.</p>
+  <div style="margin-top:18px">
+    <span class="tag">Cartographic system</span><span class="tag">Editorial structure</span><span class="tag">Waypoint sections</span><span class="tag">Route-line spine</span><span class="tag">No gradient blobs</span><span class="tag">No card grids</span>
+  </div>
+  <p style="margin-top:22px;color:#fff;font-family:var(--mono);font-size:12px;letter-spacing:.04em">→ Building this now as the full landing page. Same content structure, new visual system.</p>
+</div></section>
+
+</body>
+</html>
